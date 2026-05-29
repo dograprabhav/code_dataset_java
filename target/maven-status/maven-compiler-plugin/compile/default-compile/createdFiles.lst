@@ -1,0 +1,8 @@
+com/project/models/BaseEntity.class
+com/project/service/ProjectSummaryBuilder.class
+com/project/service/ProjectService.class
+com/project/models/Task.class
+com/project/models/User.class
+com/project/models/Project.class
+com/project/service/UserService.class
+com/project/models/TaskStatus.class
