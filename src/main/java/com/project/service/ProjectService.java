@@ -17,6 +17,9 @@ public class ProjectService {
     }
 
     public Project createProject(String id, String title, String ownerId) {
+        if (projects.containsKey(id)) {
+            throw new IllegalArgumentException("Project " + id + " already exists");
+        }
         if (userService.getUser(ownerId).isEmpty()) {
             throw new IllegalArgumentException("Owner " + ownerId + " does not exist");
         }

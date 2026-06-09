@@ -1,12 +1,14 @@
 package com.project.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class User extends BaseEntity {
 
+    public static final String DEFAULT_ROLE = "viewer";
     private static final Set<String> ALLOWED_ROLES = Set.of("viewer", "editor", "admin");
 
     private final String name;
@@ -16,11 +18,14 @@ public class User extends BaseEntity {
     private final List<String> tags;
 
     public User(String id, String name, String email) {
-        this(id, name, email, "viewer");
+        this(id, name, email, DEFAULT_ROLE);
     }
 
     public User(String id, String name, String email, String role) {
         super(id);
+        if (!ALLOWED_ROLES.contains(role)) {
+            throw new IllegalArgumentException("Invalid role: " + role);
+        }
         this.name = name;
         this.email = email;
         this.role = role;
@@ -56,7 +61,7 @@ public class User extends BaseEntity {
     }
 
     public List<String> getTags() {
-        return tags;
+        return Collections.unmodifiableList(tags);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.project.models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class Project extends BaseEntity {
     }
 
     public boolean addMember(String userId) {
-        if (members.contains(userId)) {
+        if (userId.equals(ownerId) || members.contains(userId)) {
             return false;
         }
         members.add(userId);
@@ -52,7 +53,7 @@ public class Project extends BaseEntity {
     }
 
     public List<String> getMembers() {
-        return members;
+        return Collections.unmodifiableList(members);
     }
 
     @Override

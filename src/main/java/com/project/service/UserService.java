@@ -12,7 +12,7 @@ public class UserService {
     private final Map<String, User> users = new HashMap<>();
 
     public User createUser(String id, String name, String email) {
-        return createUser(id, name, email, "viewer");
+        return createUser(id, name, email, User.DEFAULT_ROLE);
     }
 
     public User createUser(String id, String name, String email, String role) {

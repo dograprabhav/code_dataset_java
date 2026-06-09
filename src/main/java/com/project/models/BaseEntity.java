@@ -4,16 +4,16 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BaseEntity {
+public abstract class BaseEntity {
 
     private final String id;
     private final Instant createdAt;
 
-    public BaseEntity(String id) {
+    protected BaseEntity(String id) {
         this(id, null);
     }
 
-    public BaseEntity(String id, Instant createdAt) {
+    protected BaseEntity(String id, Instant createdAt) {
         this.id = id;
         this.createdAt = (createdAt != null) ? createdAt : Instant.now();
     }
@@ -26,6 +26,10 @@ public class BaseEntity {
         return createdAt;
     }
 
+    /**
+     * Subclasses must call {@code super.toDict()} and add their own fields
+     * to the returned (mutable) map.
+     */
     public Map<String, Object> toDict() {
         Map<String, Object> map = new HashMap<>();
         map.put("id", id);
